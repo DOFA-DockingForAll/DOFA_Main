@@ -45,10 +45,13 @@ public class PS1Handler {
 		
 		try {
 			FileOutputStream output = new FileOutputStream(this.root + "programInstall.ps1");
-			String data = "cd " + root +"\n\n";
+			String data = "#!/src/programInstall.ps1" + "\n\n";
+			data += "cd " + root +"\n\n";
 			String temp = "";
 			for(int i = 0; i < this.programList.length; i++) {
-				temp = "Start-Process -FilePath \"msiexec\" -Wait -ArgumentList '/quiet /i \"";
+				temp = "#filenum"+i+":  "+programList[i]+"\n";
+				//echo Ãß°¡
+				temp += "Start-Process -FilePath \"msiexec\" -Wait -ArgumentList '/quiet /i \"";
 				temp += programList[i];
 				temp += "\" WRAPPED_ARGUMENTS=\"/S\"'";
 				data += temp + "\n\n";
