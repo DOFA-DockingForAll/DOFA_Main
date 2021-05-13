@@ -9,8 +9,8 @@ Docking for all-project
 ### start client
 
 # server
-### set port to official ip
+### set port to official ip https://4sii.tistory.com/3
 
 # client 
-### 실행확인 팝업창 확인 
+### 실행확인 팝업창 확인 https://nhj12311.tistory.com/342
 ### ps1파일 파워쉘로 실행되게 https://www.youtube.com/watch?v=AT_t2jiGuy8 
