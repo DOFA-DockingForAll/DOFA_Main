@@ -1,105 +1,188 @@
 package javaChecklist;
 
 import java.awt.*;
-<<<<<<< HEAD
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-=======
->>>>>>> origin/main
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 public class Checklist extends JFrame {
-<<<<<<< HEAD
-	JFrame frame;
-	InstFile f1 = new InstFile("atom", "atom");
-	InstFile f2 = new InstFile("firefox", "firefox");
-	InstFile f3 = new InstFile("DevC", "DevC");
-	InstFile[] arr = {f1, f2, f3};
-	JLabel a;
-	JCheckBox[] c = new JCheckBox[arr.length];
-	Button btnDL = new Button("download");
+	String[] exe = new String[2];
+	String[] msi = new String[2];
+	String[] file = new String[2];
+	ArrayList<InstFile> list = new ArrayList<InstFile>();
+	ArrayList<JCheckBox> cblist = new ArrayList<JCheckBox>();
 	
+	JFrame frame;
 	Checklist(){
+		
+//		InstFile[] arr = new InstFile[];
+		list.add(new InstFile("atom.exe", "atom.msi"));
+		list.add(new InstFile("firefox.exe", "firefox.msi"));
+		list.add(new InstFile("Devcpp.exe", "Devcpp.msi"));
+		
 		setTitle("DOFA testmode");
 		setSize(300, 300);
 		
+		createChBox();
+		
+		//컴포넌트 위치 정하기
+		
+		Button btnDL = new Button("download");
+		btnDL.addActionListener(new ActionListener() {
+				
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				String[] result = retChecklist(list);
+				//파일 다운로드 함수호출(result);
+				System.exit(0);
+				//dispose();한 프레임만 삭제
+			}
+		});
+		
+		Button btnExefile = new Button("exe파일 선택");
+		btnExefile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileChoose();
+				exe[0] = file[0];
+				exe[1] = file[1];
+			}
+		});
+		
+		Button btnMsifile = new Button("msi파일 선택");
+		btnMsifile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				fileChoose();
+				msi[0] = file[0];
+				msi[1] = file[1];
+			}
+		});
+		
+		Button btnAddfile = new Button("파일 추가하기");
+		btnAddfile.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				InstFile newInstFile = new InstFile();
+//				int count = InstFile.getCount();
+				newInstFile.setExeFilename(exe[0]);
+				newInstFile.setMsiFilename(msi[0]);
+				//System.out.print(count);
+				list.add(newInstFile);
+				cblist.add(new JCheckBox(list.get(list.size()-1).getExeFilename()));
+				
+				copyFile(exe[1], System.getProperty("user.dir")+"\\file\\"+exe[0]);
+				copyFile(msi[1], System.getProperty("user.dir")+"\\file\\"+msi[0]);
+//				System.out.println(exe[1]);
+//				System.out.print(list.get(list.size()-1).getExeFilename());
+//				System.out.println(", " + list.get(list.size()-1).getMsiFilename());
+//				arr[counter] = newInstFile;
+				createChBox();
+				setVisible(true);
+			}
+		});
+			
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setLayout(new FlowLayout());
 		setLocationRelativeTo(null);
-=======
-	
-	InstFile f1 = new InstFile("atom", "atom");
-	InstFile f2 = new InstFile("firefox", "firefox");
-	InstFile f3 = new InstFile("python", "python");
-	InstFile[] arr = {f1, f2, f3};
-	JLabel a;
-	JCheckBox[] c = new JCheckBox[arr.length];
-	String result = "";
-	
-	Checklist(){
-		this.setTitle("DOFA testmode");
-		this.setSize(300, 300);
 		
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setLayout(new FlowLayout());
->>>>>>> origin/main
-		
-		a = new JLabel("");
-		
-		for(int i = 0; i < arr.length; i++) {
-			c[i] = new JCheckBox(arr[i].getMsiFilename());
-			c[i].setBorderPainted(true);
-			c[i].addItemListener(new CheckItemListener());
-			this.add(c[i]);
-		}
-<<<<<<< HEAD
-		add(a);
+		add(btnExefile);
+		add(btnMsifile);
+		add(btnAddfile);
 		add(btnDL);
-		setVisible(true);
 		
+		setVisible(true);
 	}
-	public String[] retChecklist(InstFile[] arr) {
-		String[] check = new String[arr.length];
+	public void copyFile(String oriPath, String copyPath){
+//		String copyPath = "C:\\Users\\user\\Desktop\\DOFA_GY\\file\\" + exe[0]; //복사파일경로
+		File oriFile = new File(oriPath);
+		File copyFile = new File(copyPath);
+		
+		try {
+			FileInputStream fis = new FileInputStream(oriFile);
+			FileOutputStream fos = new FileOutputStream(copyFile);
+			
+			int fileByte = 0;
+			while((fileByte = fis.read()) != -1){
+				fos.write(fileByte);
+			}
+			fis.close();
+			fos.close();
+//			System.out.println("파일복사완료");
+		}catch(IOException e){
+			e.printStackTrace();
+		}
+	}
+	public void createChBox() {
+		for(int i = 0; i < list.size(); i++) {
+			cblist.add(new JCheckBox(list.get(i).getExeFilename()));
+			cblist.get(i).setBorderPainted(true);
+			cblist.get(i).addItemListener(new CheckItemListener());
+			add(cblist.get(i));
+		}
+	}
+	
+	public void fileChoose() {
+		//JLabel lb = new JLabel();
+		file[0] = "";
+		file[1] = "";
+		JFileChooser chooser = new JFileChooser();
+		int ret = chooser.showOpenDialog(null);
+		
+		if(ret != JFileChooser.APPROVE_OPTION) {
+			JOptionPane.showMessageDialog(null, "경로를 선택하지 않았습니다.", "경고", JOptionPane.WARNING_MESSAGE);
+			System.out.println(false);
+		}
+		else {
+			String filename = chooser.getSelectedFile().getName(); //파일 이름 받는것으로만 수정
+//			int pos = filename.lastIndexOf(".");
+//			file[0] = filename.substring(0, pos);
+			file[0] = filename;
+			file[1] = chooser.getSelectedFile().toString();
+			
+			System.out.println(file[0]);
+		}
+		
+//		System.out.println(path);
+//		System.out.println(list.size());
+//		System.out.println(cblist.size());
+		
+		//lb.setText(ext + ".exe");
+	}
+	public String[] retChecklist(ArrayList<InstFile> list) {
+		String[] check = new String[list.size()];
 		int cnt = 0;
-		for(int i = 0; i < arr.length; i++) {
-			if(arr[i].select == "checked") {
-				check[cnt] = arr[i].getMsiFilename();
+		for(int i = 0; i < list.size(); i++) {
+			if(list.get(i).select == "checked") {
+				check[cnt] = list.get(i).getMsiFilename();
+				System.out.print(check[cnt]);
 				cnt++;
 			}
-		}
-		for(int i = 0; i < arr.length; i++) {
-			System.out.print(check[i]);
 		}
 		return check;
 	}
 	class CheckItemListener implements ItemListener{
-=======
-		this.add(a);
-		this.setVisible(true);
-		
-	}
-	class CheckItemListener implements ItemListener{
-
->>>>>>> origin/main
 		@Override
 		public void itemStateChanged(ItemEvent e) {
-			if(e.getItem() == c[0]) {
-				arr[0].select(e.getStateChange() == 1 ? "checked" : "unchecked");
+			if(e.getItem() == cblist.get(0)) {
+				list.get(0).select(e.getStateChange() == 1 ? "checked" : "unchecked");
 			}
-			else if(e.getItem() == c[1]) {
-				arr[1].select(e.getStateChange() == 1 ? "checked" : "unchecked");
+			else if(e.getItem() == cblist.get(1)) {
+				list.get(1).select(e.getStateChange() == 1 ? "checked" : "unchecked");
 			}
-			else if(e.getItem() == c[2]) {
-				arr[2].select(e.getStateChange() == 1 ? "checked" : "unchecked");
-			}
-<<<<<<< HEAD
-			else if(e.getItem() == btnDL) {
-				frame.setVisible(false);
-				//list넘겨주는 명령어 실행
-				//명령어(retChecklist(arr));
+			else if(e.getItem() == cblist.get(2)) {
+				list.get(2).select(e.getStateChange() == 1 ? "checked" : "unchecked");
 			}
 			else {
 				return;
@@ -108,19 +191,4 @@ public class Checklist extends JFrame {
 		}
 	}
 	
-=======
-			else {
-				return;
-			}
-			for(int i = 0; i < arr.length; i++) {
-				if(arr[i].select == "checked") {
-					a.setText(arr[i].getMsiFilename());
-					//result = result + "\n" + arr[i].getMsiFilename();
-				}
-			}
-			a.setText(result);
-		}
-		
-	}
->>>>>>> origin/main
 }
