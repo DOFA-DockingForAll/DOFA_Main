@@ -1,12 +1,23 @@
 public class ExecuteFile {
-	public static void main(String [] args) {
-		
-		String rootAddress =System.getProperty("user.dir")+"\\files\\"; 
-		String[] programList = new String[1];
-		programList[0] = "Firefox Setup 14.0.1.msi";
-		//programList[1] = "Dev-Cpp 5.11 TDM-GCC 4.9.2 Setup.msi";
-		//programList[2] = "AtomSetup-x64.msi";
-		
+	private String rootAddress;
+	private String[] programList;
+	
+	ExecuteFile(){
+		rootAddress = System.getProperty("user.dir")+"\\files\\";
+		programList = new String[0];
+	}
+	
+	public void setRoot(String rootAddress) {
+		rootAddress = System.getProperty("user.dir")+"\\files\\";
+	}
+	
+	public void setFiles(String[] programList) {
+		this.programList = new String[programList.length];
+		for(int i = 0; i < programList.length; i++)
+			this.programList[i] = programList[i];
+	}
+	
+	public void startInstall() {
 		String dirPath ="./files/";
 		String serverIP = "192.168.0.59"; //String serverIP = args[0];
     	int port = 8080; //int port = Integer.parseInt(args[1]);
@@ -26,4 +37,6 @@ public class ExecuteFile {
 		else // ps1颇老 积己 角菩 
 			System.out.println("ps1颇老 积己 角菩 ");
 	}
+	
+
 }
