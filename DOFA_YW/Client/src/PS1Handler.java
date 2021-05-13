@@ -50,10 +50,11 @@ public class PS1Handler {
 			String temp = "";
 			for(int i = 0; i < this.programList.length; i++) {
 				temp = "#filenum"+i+":  "+programList[i]+"\n";
-				//echo Ãß°¡
+				temp += "echo \'installling " + programList[i] + "......\'\n"; 
 				temp += "Start-Process -FilePath \"msiexec\" -Wait -ArgumentList '/quiet /i \"";
 				temp += programList[i];
 				temp += "\" WRAPPED_ARGUMENTS=\"/S\"'";
+				temp += "\necho \'installation complete\'\n";
 				data += temp + "\n\n";
 			}
 			System.out.println(data);

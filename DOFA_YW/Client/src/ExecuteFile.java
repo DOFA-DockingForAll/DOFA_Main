@@ -8,7 +8,7 @@ public class ExecuteFile {
 		//programList[2] = "AtomSetup-x64.msi";
 		
 		String dirPath ="./files/";
-		String serverIP = "127.0.0.1"; //String serverIP = args[0];
+		String serverIP = "192.168.0.59"; //String serverIP = args[0];
     	int port = 8080; //int port = Integer.parseInt(args[1]);
         
 		FileClient fc = new FileClient(serverIP, port);
