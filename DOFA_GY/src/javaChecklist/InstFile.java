@@ -7,11 +7,10 @@ public class InstFile {
 	
 	public InstFile() {}
 	
-	public InstFile(String msi, String exe) {
+	public InstFile(String exe, String msi) {
 		this.msiFilename = msi;
 		this.exeFilename = exe;
 	}
-	
 	public String getMsiFilename() {
 		return msiFilename;
 	}
@@ -28,5 +27,6 @@ public class InstFile {
 	public void select(String select) {
 		this.select = select;
 	}
+	
 	
 }
