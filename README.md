@@ -9,7 +9,8 @@ Docking for all-project
 ### start client
 ***
 # server
-### set port to official ip #### https://4sii.tistory.com/3
+### set port to official ip
+#### https://4sii.tistory.com/3
 ***
 # client 
 ### 실행확인 팝업창 확인 
@@ -17,5 +18,5 @@ Docking for all-project
 ### ps1파일 파워쉘로 실행되게 
 #### https://www.youtube.com/watch?v=AT_t2jiGuy8
 ***
-#gui
+# gui
 ### javafx
