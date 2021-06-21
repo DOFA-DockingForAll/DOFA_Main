@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +39,7 @@ public class RottController implements Initializable {
 	private List<String> DLlist = new ArrayList<String>();
 	@FXML
 	private CheckBox checkBoxAtom, checkBoxDevCpp;
-	
+	private String[] log = new String[4];
 	@FXML
     private BorderPane bp;
 	@FXML
@@ -46,8 +47,15 @@ public class RottController implements Initializable {
 	@FXML
     private FlowPane list;
 	@FXML
-	private CheckBox checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7, checkbox8, checkbox9, checkbox10;
-	private CheckBox[] chids = {checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7, checkbox8, checkbox9, checkbox10};
+	private CheckBox checkbox1;
+	@FXML
+	private CheckBox checkbox2;
+	@FXML
+	private CheckBox checkbox3;
+	@FXML
+	private CheckBox checkbox4;
+//	private CheckBox[] chids = {checkbox1, checkbox2, checkbox3, checkbox4, checkbox5, checkbox6, checkbox7, checkbox8, checkbox9, checkbox10};
+//	private CheckBox[] chids = new CheckBox[4];
 	
 //    @FXML
 //    private List<CheckBox> checkBox = new ArrayList<CheckBox>();
@@ -69,41 +77,52 @@ public class RottController implements Initializable {
     	
         if(txtUserName.getText().equals("chavi55") && txtPassword.getText().equals("pass")){//어디서 갖고오기
             lblStatus.setText("Login Success");
-            Parent main = FXMLLoader.load(getClass().getResource("SideBar.fxml"));
+            Parent main = FXMLLoader.load(getClass().getResource("/application/SideBar.fxml"));
             
             Scene scene = new Scene(main);
             stage.setScene(scene);
+            
             stage.show();
+            
         }else{
             lblStatus.setText("Login Failed");
         }
     }
-	@FXML
 	public void update() {
-		String[] log= {"DD","D", "dddd"};
-    	int cnt = 0;
-    	for(String logfilename : log) {
-    		System.out.println(logfilename);
-    		chids[cnt].setText(logfilename);
-    		chids[cnt].setVisible(true);
-    		cnt++;
-    	}
+		log[0] = "d";
+		log[1] = "dd";
+		log[2] = "ddd";
+		log[3] = "DDDD";
+    	checkbox1.setText(log[0]);
+    	checkbox1.setVisible(true);
+    	checkbox2.setText(log[1]);
+    	checkbox2.setVisible(true);
+    	checkbox3.setText(log[2]);
+    	checkbox3.setVisible(true);
+    	checkbox4.setText(log[3]);
+    	checkbox4.setVisible(true);
 	}
-    @FXML
     public void downBtn() {
     	List<String> logSelect = new ArrayList<String>();
-    	for(CheckBox check: chids) {
-    		
-    		if(check.isSelected()) {
-    			String checkedname = check.getText();
-    			logSelect.add(checkedname);//다운로드 파일명 리스트
-    		}
-			System.out.println(check);
-		}
+    	if(checkbox1.isSelected()) {
+    		String checkedname = checkbox1.getText();
+    		logSelect.add(checkedname);//다운로드 파일명 리스트
+    	}
+    	if(checkbox2.isSelected()) {
+    		String checkedname = checkbox2.getText();
+    		logSelect.add(checkedname);//다운로드 파일명 리스트
+    	}
+    	if(checkbox3.isSelected()) {
+    		String checkedname = checkbox3.getText();
+    		logSelect.add(checkedname);//다운로드 파일명 리스트
+    	}
+    	if(checkbox4.isSelected()) {
+    		String checkedname = checkbox4.getText();
+    		logSelect.add(checkedname);//다운로드 파일명 리스트
+    	}
     }
     @FXML
     private void home(MouseEvent e) {
-    	checkbox1.setVisible(true);
     	loadPage("home");
     }
     @FXML

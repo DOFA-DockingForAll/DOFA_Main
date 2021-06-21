@@ -22,19 +22,14 @@
                   <CheckBox fx:id="checkbox2" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
                   <CheckBox fx:id="checkbox3" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
                   <CheckBox fx:id="checkbox4" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
-                  <CheckBox fx:id="checkbox5" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
-                  <CheckBox fx:id="checkbox6" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
-                  <CheckBox fx:id="checkbox7" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
-                  <CheckBox fx:id="checkbox8" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
-                  <CheckBox fx:id="checkbox9" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
-                  <CheckBox fx:id="checkbox10" mnemonicParsing="false" prefHeight="16.0" prefWidth="308.0" text="CheckBox" visible="false" />
                </children></FlowPane>
          </children>
          </AnchorPane>
-                  <Button alignment="BOTTOM_CENTER" layoutX="48.0" layoutY="469.0" mnemonicParsing="false" onMouseClicked="#downBtn" prefHeight="25.0" prefWidth="360.0" style="-fx-background-color: #FFFFFF;" text="download">
+                  <Button alignment="BOTTOM_CENTER" layoutX="48.0" layoutY="469.0" mnemonicParsing="false" onMouseClicked="#downBtn" prefHeight="25.0" prefWidth="360.0" style="-fx-background-color: #FFFFFF" text="download">
                      <font>
                         <Font name="Hancom Gothic Regular" size="11.0" />
                      </font>
                   </Button>
+      <Button layoutX="542.0" layoutY="159.0" mnemonicParsing="false" onMouseClicked="#update" text="Button" />
    </children>
 </AnchorPane>
