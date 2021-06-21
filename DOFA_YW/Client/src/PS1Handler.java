@@ -48,14 +48,28 @@ public class PS1Handler {
 			String data = "#!/src/programInstall.ps1" + "\n\n";
 			data += "cd " + root +"\n\n";
 			String temp = "";
+			
 			for(int i = 0; i < this.programList.length; i++) {
+				String inProcess = "";
+				String waitingProcess = "";
+				for(int a = 0; a < i+1; a++)
+					inProcess += "¡á¡á¡á";
+				for(int a = i+1; a < this.programList.length; a++)
+					waitingProcess += "¡à¡à¡à";
+				int percent = (i+1) * 100 / this.programList.length;
 				temp = "#filenum"+i+":  "+programList[i]+"\n";
-				//echo Ãß°¡
-				temp += "Start-Process -FilePath \"msiexec\" -Wait -ArgumentList '/quiet /i \"";
+				temp += "echo \'installling " + programList[i] + "......\'\n"; 
+				temp += "echo \'installling process (" + (i+1) + " / " + this.programList.length + ")......\'\n"; 
+				temp += "echo \'in Process...." + inProcess + waitingProcess + percent + "%..\'\n"; 
+				temp += "$p=Start-Process -FilePath \"msiexec\" -Wait -PassThru -ArgumentList '/quiet /i \"";
 				temp += programList[i];
 				temp += "\" WRAPPED_ARGUMENTS=\"/S\"'";
-				data += temp + "\n\n";
+				temp += "\necho \'installation complete\'\n";
+				temp += "\necho errorcode: $p.ExitCode\n";
+				temp += "./errorHandle/ecodeToText.ps1";
+				data += temp + "\n";
 			}
+			data += "\nsleep 60\n";
 			System.out.println(data);
 			try {
 				output.write(data.getBytes());

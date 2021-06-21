@@ -1,6 +1,7 @@
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -19,8 +20,35 @@ public class FileServerThread extends Thread{
 		try {
 	        InputStream input = socket.getInputStream();
 	        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
-	        String FileName =reader.readLine();//String FileName = args[2];  
-	        System.out.println("FileName: "+FileName);
+	        String FileName = reader.readLine();//String FileName = args[2];  
+	        System.out.println(FileName);
+	        if(FileName.equals("POSTFILE")) { // 서버로 파일 업로드 // 파일 없으면 생성 필요
+	        	FileName = reader.readLine();
+	        	System.out.println(FileName);
+	        	FileOutputStream fos = new FileOutputStream(FileName); // 파일 없으면 생성 필요
+	        	
+	        	double startTime = System.currentTimeMillis(); 
+	            byte[] buffer = new byte[DEFAULT_BUFFER_SIZE];
+	            int readBytes;
+	            
+	            while ((readBytes = input.read(buffer)) != -1) {
+	            	System.out.println(readBytes);
+	                fos.write(buffer, 0, readBytes);
+	                
+	            }    
+	            System.out.println(readBytes);
+	            double endTime = System.currentTimeMillis();
+	            double diffTime = (endTime - startTime)/ 1000;
+	 
+	            System.out.println("time: " + diffTime+ " second(s)");
+	            
+	            input.close();
+	            fos.close();
+	            socket.close();
+	        	return;
+	        }
+	        
+	        System.out.println("FileName: "+FileName); // 서버로부터 파일 전송
 	        File file = new File(FileName);
 	        if (!file.exists()) {
 	            System.out.println("File not Exist.");

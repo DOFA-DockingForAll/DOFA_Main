@@ -2,6 +2,7 @@ import java.awt.Desktop;
 import java.io.File;
 import java.io.IOException;
 
+
 public class ExeMsi extends Thread{
 	String root;
 	String fileName;
@@ -14,7 +15,8 @@ public class ExeMsi extends Thread{
 	public void run() {
 		try {
 			Thread.sleep(1000);
-			open(root+fileName);
+			//ExeByAdmin.runProgramAsAdmin(root+fileName, "");//관리자 권한으로 실행
+			open(root+fileName); // ps1실행
 			Thread.sleep(1000);
 		} catch (IOException e) {
 			System.out.println("could not open");
