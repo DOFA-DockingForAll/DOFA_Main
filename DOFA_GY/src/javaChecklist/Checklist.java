@@ -29,7 +29,7 @@ public class Checklist extends JFrame {
 		list.add(new InstFile("Devcpp.exe", "Devcpp.msi"));
 		
 		setTitle("DOFA testmode");
-		setSize(300, 300);
+		setSize(300, 300);	
 		
 		createChBox();
 		
