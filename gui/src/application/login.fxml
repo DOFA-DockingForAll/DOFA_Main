@@ -4,11 +4,12 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane minHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RottController">
+<AnchorPane minHeight="600.0" prefWidth="1000.0" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.RottController">
    <children>
       <AnchorPane layoutX="520.0" layoutY="63.0" prefHeight="475.0" prefWidth="415.0" style="-fx-background-color: #FFFFFF;">
          <children>
@@ -32,9 +33,17 @@
                   <Font name="Hancom Gothic Regular" size="20.0" />
                </font>
             </Label>
+            <Label fx:id="lblStatus" layoutX="58.0" layoutY="373.0" textFill="#d73030">
+               <font>
+                  <Font name="Hancom Gothic Regular" size="12.0" />
+               </font>
+            </Label>
          </children>
       </AnchorPane>
-      <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="163.0" layoutY="203.0" pickOnBounds="true" preserveRatio="true" />
+      <ImageView fitHeight="235.0" fitWidth="245.0" layoutX="115.0" layoutY="175.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../ui/dockingpeng.png" />
+         </image></ImageView>
       <Label layoutX="105.0" layoutY="63.0" text="DOcking For All">
          <font>
             <Font name="Hancom Gothic Regular" size="39.0" />
