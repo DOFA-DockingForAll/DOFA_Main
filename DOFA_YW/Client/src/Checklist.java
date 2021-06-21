@@ -22,9 +22,15 @@ public class Checklist extends JFrame{
 	private static ArrayList<JCheckBox> cblist = new ArrayList<JCheckBox>();
 	private static String[] result;
 	private static boolean selected;
+	private String usrID;
 	
 	Checklist(){
 		selected = false;
+		usrID = "defaultUsr";
+	}
+	
+	public void setUsrID(String usrID) {
+		this.usrID = usrID;
 	}
 	
 	public boolean isSelected() {
@@ -61,7 +67,7 @@ public class Checklist extends JFrame{
 				result = retChecklist(list);
 				//파일 다운로드 함수호출(result);
 				selected = true;
-				ExecuteFile ef = new ExecuteFile();
+				ExecuteFile ef = new ExecuteFile(usrID);
 				ef.setFiles(result);
 				ef.startInstall();
 				System.exit(0);
